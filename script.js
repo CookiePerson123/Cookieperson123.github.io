@@ -114,16 +114,24 @@
         }
 
         function aboutBlank() {
-            const newWindow = window.open("about:blank", "_blank");
-            let zone = zones.find(zone => zone.id + '' === document.getElementById('zoneId').textContent).url.replace("{COVER_URL}", coverURL).replace("{HTML_URL}", htmlURL);
-            fetch(zone+"?t="+Date.now()).then(response => response.text()).then(html => {
-                if (newWindow) {
-                    newWindow.document.open();
-                    newWindow.document.write(html);
-                    newWindow.document.close();
-                }
-            })
-        }
+    fetch('index.html')
+        .then(response => {
+            if (!response.ok) throw new Error("Failed to load template");
+            return response.text();
+        })
+        .then(html => {
+            const newWin = window.open("about:blank", "_blank");
+            if (newWin) {
+                newWin.document.open();
+                newWin.document.write(html);
+                newWin.document.close();
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("Failed to load the HTML file.");
+        });
+}
 
         function closeZone() {
             zoneViewer.style.display = "none";
