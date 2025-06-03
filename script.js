@@ -113,7 +113,7 @@
             }
         }
 
-        function aboutBlank() {
+        <!--function aboutBlank() {-->
     fetch('index.html')
         .then(response => {
             if (!response.ok) throw new Error("Failed to load template");
@@ -131,7 +131,7 @@
             console.error("Error:", error);
             alert("Failed to load the HTML file.");
         });
-}
+<!--}-->
 
         function closeZone() {
             zoneViewer.style.display = "none";
